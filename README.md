@@ -23,4 +23,4 @@ Things you may want to cover:
 
 * ...
 
-[![Codeship Status for kaydc18/drunk-cupcakes](https://app.codeship.com/projects/626a3f8d-a616-40d7-9705-a39fc278688c/status?branch=master)](https://app.codeship.com/projects/416266)
+[![Codeship Status for kaydc18/drunk-cupcakes](https://app.codeship.com/projects/8ff21815-d233-475c-bb3c-b993fb09c548/status?branch=master)](https://app.codeship.com/projects/416577)
