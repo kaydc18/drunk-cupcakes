@@ -1,0 +1,47 @@
+@import 'settings';
+
+.top-bar {
+  width: 100%;
+  max-height: 100px;
+}
+
+.title-bar {
+  width: 100%;
+}
+
+$topbar-center-logo-bg: $violet;
+
+.topbar-center-logo {
+  background: $topbar-center-logo-bg;
+
+  img {
+    max-height: 90px;
+  }
+
+  .menu {
+    background: $topbar-center-logo-bg;
+
+    a {
+      color: $green-yellow-crayon;
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.topbar-center-logo .top-bar-center {
+  flex: 1 0 auto;
+
+  @include breakpoint(small only) {
+    display: none;
+  }
+}
+
+.topbar-center-logo-mobile {
+  background: $topbar-center-logo-bg;
+
+  .menu-icon {
+    vertical-align: text-top;
+  }
+}
+

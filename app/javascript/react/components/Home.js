@@ -1,32 +1,35 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 
 import cupcake from '../../../assets/images/cupcake.png'
-import SearchIndex from './SearchIndex'
 
 export const Home = (props) => {
   return(
-  <Fragment>
     <div className="container">
-      <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
-        <div className="cell medium-2">
+      <div className="align-self-middle">
+      <div className="grid-x grid-padding-x grid-padding-y grid-margin-x align-middle align-center">
+        <div className="cell medium-4 text-center">
         <img src={cupcake}/>
         </div>
-        <div className="cell medium-4">
-          <div className="callout-purple">
-            <h1>Welcome to DrunkCupcakes!</h1>
-            <h3>Now you can eat your booze! Just search for a drink or ingredient of choice and receive a cupcake recipe of that drink!</h3>
+        <div className="cell medium-8 large-5 callout-purple">
+          <h1>Welcome to DrunkCupcakes!</h1>
+          <h3>Now you can eat your booze! Just search for a drink or ingredient of choice and receive a cupcake recipe of that drink!</h3>
+        </div>
+        <div className="cell large-12">
+          <div className="grid-x grid-margin-x grid-margin-y grid-padding-y align-middle align-center">
+            <div className="cell large-3">
+              <div className="fun-button">Login</div>
+            </div>
+            <div className="cell large-3">
+              <div className="fun-button">Sign Up</div>
+            </div>
+            <div className="cell large-3">
+              <div className="fun-button">Search</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div className="container">
-      <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
-        <div className="cell medium-4">
-          <SearchIndex />
-        </div>
       </div>
-    </div>
-  </Fragment>
+    </div> 
   )
 }
 

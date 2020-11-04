@@ -1,29 +1,18 @@
-import React from 'react'
+import React, {Fragment} from 'react'
+
+import SearchIngredient from './SearchIngredient'
 
 export const SearchIndex = (props) => {
   return(
-    <div className="callout-purple">
-      <h2 className="text-center">Search By Ingredient</h2>
-      <form>
-        <label>Alcohol
-          <select>
-            <option value="husker">Vodka</option>
-            <option value="starbuck">Gin</option>
-            <option value="hotdog">Rum</option>
-            <option value="apollo">Tequila</option>
-          </select>
-        </label>
-        <label>Favorite Mixer
-          <select>
-            <option value="husker">Orange Juice</option>
-            <option value="starbuck">Cranberry Juice</option>
-            <option value="hotdog">Grenadine</option>
-            <option value="apollo">Lime Juice</option>
-          </select>
-        </label>
-      </form>
+  <Fragment>
+    <div className="container">
+      <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
+        <div className="cell medium-12 large-4">
+          <SearchIngredient />
+        </div>
+      </div>
     </div>
-
+  </Fragment>
   )
 }
 

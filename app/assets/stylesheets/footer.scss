@@ -1,0 +1,17 @@
+@import 'settings';
+
+.footer {
+  background-color: $violet;
+  // bottom: 0;
+  // position: absolute;
+  width:100%;
+  
+  h5 {
+    font-family: 'Indie Flower', cursive;
+  }
+  li {
+    font-size: 2rem;
+    list-style: none;
+    margin: 0 .5rem;
+  }
+}

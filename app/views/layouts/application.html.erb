@@ -7,21 +7,37 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
-  <nav class="top-bar">
-    <h1><a href="/">DrunkCupcakes</a></h1>
 
-    <section class="top-bar-section">
-      <ul class="right">
-        <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
+  <!-- mobile nav bar -->
+  <div class="title-bar topbar-center-logo-mobile" data-responsive-toggle="topbar-center-logo" data-hide-for="medium">
+    <div class="title-bar-left">
+      <div class="title-bar-title"><%= image_tag("DrunkCupcakes.png") %></div>
+    </div>
+    <div class="title-bar-right">
+      <button class="menu-icon" type="button" data-toggle="topbar-center-logo"></button>
+    </div>
+  </div>
+  <!-- /mobile nav bar -->
+
+  <!-- medium and larger nav bar -->
+  <div class="top-bar topbar-center-logo" id="topbar-center-logo">
+    <div class="top-bar-left">
+      <ul class="menu vertical medium-horizontal">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Search</a></li>
       </ul>
-    </section>
-  </nav>
+    </div>
+    <div class="top-bar-center">
+      <a href="/"><%= image_tag("DrunkCupcakes.png") %></a>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu vertical medium-horizontal">
+        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+      </ul>
+    </div>
+  </div>
+  <!-- /medium and larger nav bar -->
 
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
@@ -41,5 +57,15 @@
   <%= javascript_pack_tag 'application' %>
   
   <%= yield :extra_footer %>
+  <div class="grid-x footer align-middle grid-padding-x align-self-bottom">
+    <div class="cell medium-6">
+      <h5>created with love, by Kay DC</h5>
+    </div>
+    <div class="cell medium-6 text-right">
+      <ul>
+        <li><i class="fi-social-github"></i></li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
