@@ -1,0 +1,37 @@
+@import 'settings';
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+
+  h3 {
+    font-family: 'Indie Flower', cursive;
+  }
+}
+
+.fun-button {
+  background-color: $green-yellow-crayon;
+  box-shadow: 6px 6px 0px 4px $space-cadet,
+  inset 1px 1px 0px 3px $pacific-blue;
+  color: $pacific-blue;
+  font-family: 'Indie Flower', cursive;
+  font-size: 3rem;
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.callout-purple {
+  background-color: $violet;
+  border-radius: 10px;
+  border: 1px solid $space-cadet;
+}
+
+.top-padding {
+  padding-top: 15%;
+}
+
+.full-height {
+  height: 100%;
+}
