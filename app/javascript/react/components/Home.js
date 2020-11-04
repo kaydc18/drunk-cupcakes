@@ -4,14 +4,14 @@ import cupcake from '../../../assets/images/cupcake.png'
 
 export const Home = (props) => {
   return(
-    <div className="container">
+    <div className="container-max">
       <div className="align-self-middle">
       <div className="grid-x grid-padding-x grid-padding-y grid-margin-x align-middle align-center">
         <div className="cell medium-4 text-center">
-        <img src={cupcake}/>
+          <img src={cupcake}/>
         </div>
-        <div className="cell medium-8 large-5 callout-purple">
-          <h1>Welcome to DrunkCupcakes!</h1>
+        <div className="cell auto callout-purple">
+          <h1>Welcome to Drunk Cupcakes!</h1>
           <h3>Now you can eat your booze! Just search for a drink or ingredient of choice and receive a cupcake recipe of that drink!</h3>
         </div>
         <div className="cell large-12">
