@@ -1,0 +1,24 @@
+@import 'settings';
+
+body {
+  h3 {
+    font-family: 'Indie Flower', cursive;
+  }
+}
+
+.fun-button {
+  background-color: $green-yellow-crayon;
+  box-shadow: 6px 6px 0px 4px $space-cadet,
+  inset 1px 1px 0px 3px $pacific-blue;
+  color: $pacific-blue;
+  font-family: 'Indie Flower', cursive;
+  font-size: 42px;
+  padding: .5em 1em;
+}
+
+.callout-purple {
+  background-color: $violet;
+  border-radius: 10px;
+  border: 1px solid $space-cadet;
+  padding: 2rem;
+}
