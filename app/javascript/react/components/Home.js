@@ -4,7 +4,7 @@ import cupcake from '../../../assets/images/cupcake.png'
 
 export const Home = (props) => {
   return(
-    <div className="container-max">
+    <div className="grid-container">
       <div className="align-self-middle">
       <div className="grid-x grid-padding-x grid-padding-y grid-margin-x align-middle align-center">
         <div className="cell medium-4 text-center">
