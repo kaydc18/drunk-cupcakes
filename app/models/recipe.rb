@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  validates :drinks_id, presence: true
-  validates :name, presence: true
+  validates :drink_id, presence: true
+  validates :drink_name, presence: true
   
 end
