@@ -1,14 +1,10 @@
 class CreateRecipes < ActiveRecord::Migration[5.2]
   def up
-    create_table :recipes, id: false do |t|
-      t.bigint :id, primary: true
+    create_table :recipes do |t|
+      t.bigint :drinks_id, null: false
       t.string :name, null: false
 
       t.timestamps
     end
-    execute %Q{ ALTER TABLE "recipes" ADD PRIMARY KEY ("id"); }
-  end
-  def down
-    drop_table(:recipes)
   end
 end
