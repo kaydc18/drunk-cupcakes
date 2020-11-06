@@ -17,9 +17,31 @@ parsed_response = JSON.parse(response.body)
 
 first_drink = parsed_response["drinks"].first
 
-id = first_drink["idDrink"]
-name = first_drink["strDrink"]
+drink_id = first_drink["idDrink"]
+drink_name = first_drink["strDrink"]
+ingredients = []
+measurements = []
 
-Recipe.create(id: "#{id}", name: "#{name}")
+
+first_drink.each do |body, item|
+  if body.start_with?("strIngredient") && item != nil
+    ingredients << {"#{body}": item}
+  elsif body.start_with?("strMeasure") && item != nil
+    measurements << {"#{body}": item}
+  end
+end
+
+ingredients.each do |key, item|
+  ingredient = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
+
+  ingredient_response = JSON.parse(ingredient.body)
+
+  ingredient_response.ingredients.each do |key, item|
+    
+  end
+
+end
 
 binding.pry
+
+

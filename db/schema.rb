@@ -10,13 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_200948) do
+ActiveRecord::Schema.define(version: 2020_11_06_192528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "recipes", id: :bigint, default: nil, force: :cascade do |t|
-    t.string "name", null: false
+  create_table "ingredients", force: :cascade do |t|
+    t.bigint "ingredient_id", null: false
+    t.string "ingredient_name", null: false
+    t.boolean "ingredient_alcohol", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "measurements", force: :cascade do |t|
+    t.string "measurement", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_measurements_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_measurements_on_recipe_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.bigint "drink_id", null: false
+    t.string "drink_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
