@@ -10,10 +10,6 @@ body {
   }
 }
 
-.container-max {
-  max-width: 1200px;
-}
-
 .fun-button {
   background-color: $green-yellow-crayon;
   box-shadow: 6px 6px 0px 4px $space-cadet,
@@ -32,8 +28,4 @@ body {
   border: 1px solid $space-cadet;
   padding: 2rem;
   margin: 2rem;
-
-  h1 {
-    font-size: 3rem;
-  }
 }

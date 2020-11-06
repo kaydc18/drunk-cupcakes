@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SearchIngredient = (props) => {
+export const SearchName = (props) => {
   return(
     <div className="callout-purple">
       <h2 className="text-center">Search By Ingredient</h2>
@@ -19,4 +19,4 @@ export const SearchIngredient = (props) => {
   )
 }
 
-export default SearchIngredient
+export default SearchName

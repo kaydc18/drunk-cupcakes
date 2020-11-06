@@ -3,6 +3,10 @@
 .top-bar {
   width: 100%;
   max-height: 100px;
+  @include breakpoint(small only) {
+    padding: 0;
+    text-align: center;
+  }
 }
 
 .title-bar {
@@ -28,12 +32,18 @@ $topbar-center-logo-bg: $violet;
     }
   }
 }
+button.menu-icon::after {
+  background: $green-yellow-crayon;
+  box-shadow: 0 7px 0 $green-yellow-crayon, 
+  0 14px 0 $green-yellow-crayon;
+}
 
 .topbar-center-logo .top-bar-center {
   flex: 1 0 auto;
 
   @include breakpoint(small only) {
     display: none;
+    width: 100%;
   }
 }
 
