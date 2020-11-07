@@ -22,25 +22,48 @@ drink_name = first_drink["strDrink"]
 ingredients = []
 measurements = []
 
+recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}")
+
 
 first_drink.each do |body, item|
   if body.start_with?("strIngredient") && item != nil
-    ingredients << {"#{body}": item}
+    ingredient_number = body.delete("strIngredient")
+    ingredients << {"#{ingredient_number}": item}
   elsif body.start_with?("strMeasure") && item != nil
-    measurements << {"#{body}": item}
+    measurement_number = body.delete("strMeasure")
+    measurements << {"#{measurement_number}": item}
   end
 end
 
-ingredients.each do |key, item|
-  ingredient = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
+ingredients.each do |ingredient|
+  ingredient.each do |key, item|
+    ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
 
-  ingredient_response = JSON.parse(ingredient.body)
+    ingredient_response = JSON.parse(ingredient_search.body)
 
-  ingredient_response.ingredients.each do |key, item|
-    
+    ingredient_response["ingredients"].each do |ingredient|
+      ingredient_id = ingredient["idIngredient"]
+      ingredient_name = ingredient["strIngredient"]
+      
+      if ingredient["strAlcohol"] === "Yes"
+        ingredient_alcohol = true
+      else
+        ingredient_alcohol = false
+      end
+      measurements.each do |measure|
+        measure.each do |measure_key, measure_item|
+          if measure_key === key
+            ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
+            Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient)
+          end
+        end
+      end
+    end
   end
-
 end
+
+
+
 
 binding.pry
 
