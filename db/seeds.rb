@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Recipe.destroy_all
+Ingredient.destroy_all
+Measurement.destroy_all
 
 require "faraday"
 require "pry"
@@ -15,52 +18,58 @@ response = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s
 
 parsed_response = JSON.parse(response.body)
 
-first_drink = parsed_response["drinks"].first
+drink = parsed_response["drinks"]
 
-drink_id = first_drink["idDrink"]
-drink_name = first_drink["strDrink"]
-ingredients = []
-measurements = []
-
-recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}")
-
-
-first_drink.each do |body, item|
-  if body.start_with?("strIngredient") && item != nil
-    ingredient_number = body.delete("strIngredient")
-    ingredients << {"#{ingredient_number}": item}
-  elsif body.start_with?("strMeasure") && item != nil
-    measurement_number = body.delete("strMeasure")
-    measurements << {"#{measurement_number}": item}
+drink.each do |drink|
+  ingredients = []
+  measurements = []
+  drink_id = drink["idDrink"]
+  drink_name = drink["strDrink"]
+  drink.each do |key, item|
+    if key.start_with?("strIngredient") && item != nil
+      ingredient_number = key.delete("strIngredient")
+      ingredients << {"#{ingredient_number}": item}
+    elsif key.start_with?("strMeasure") && item != nil
+      measurement_number = key.delete("strMeasure")
+      measurements << {"#{measurement_number}": item}
+    end
   end
-end
+  
+  recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}")
 
-ingredients.each do |ingredient|
-  ingredient.each do |key, item|
-    ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
-
-    ingredient_response = JSON.parse(ingredient_search.body)
-
-    ingredient_response["ingredients"].each do |ingredient|
-      ingredient_id = ingredient["idIngredient"]
-      ingredient_name = ingredient["strIngredient"]
-      
-      if ingredient["strAlcohol"] === "Yes"
-        ingredient_alcohol = true
-      else
-        ingredient_alcohol = false
-      end
-      measurements.each do |measure|
-        measure.each do |measure_key, measure_item|
-          if measure_key === key
-            ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
-            Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient)
+  ingredients.each do |ingredient|
+    ingredient.each do |key, item|
+      ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
+  
+      ingredient_response = JSON.parse(ingredient_search.body)
+  
+      ingredient_response["ingredients"].each do |ingredient|
+        ingredient_id = ingredient["idIngredient"]
+        ingredient_name = ingredient["strIngredient"]
+        
+        if ingredient["strAlcohol"] === "Yes"
+          ingredient_alcohol = true
+        else
+          ingredient_alcohol = false
+        end
+        if Ingredient.find_by(ingredient_id: "#{ingredient_id}") != nil
+          ingredient = Ingredient.find_by(ingredient_id: "#{ingredient_id}") 
+        else
+          ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
+        end
+         measurements.each do |measure|
+          measure.each do |measure_key, measure_item|
+            if measure_key === key
+              Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient)
+            end
           end
         end
       end
     end
   end
 end
+
+
 
 
 
