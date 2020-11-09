@@ -31,6 +31,7 @@ export const SearchIndex = () => {
         name={recipe.drink_name}
         drink_id={recipe.drink_id}
         id={recipe.id}
+        key={recipe.id}
       />
     )
   })
