@@ -11,6 +11,7 @@ class Api::V1::RecipesController < ApplicationController
     recipe_id = @recipe.id
     @name = @recipe.drink_name
     @ingredient_full = []
+    @alcohol = []
     @ingredients = []
     @measurements = []
     @measurement_full = Measurement.where(recipe: "#{recipe_id}")
@@ -22,12 +23,17 @@ class Api::V1::RecipesController < ApplicationController
     @ingredient_full.each_with_index do |ingredient, ingredient_index|
       @measurements.each_with_index do |measurement, index|
         if ingredient_index === index
-        @ingredients << {name: ingredient.ingredient_name, alcohol: ingredient.ingredient_alcohol, measurement: measurement}
+          if ingredient.ingredient_alcohol === true
+            measurement_num = measurement.sub("oz", ",")
+            @alcohol << "#{measurement_num} #{ingredient.ingredient_name}"
+          else
+            @ingredients << "#{measurement_num} #{ingredient.ingredient_name}"
+          end
         end
       end
     end
 
-    render json: { recipe: @name, ingredient: @ingredients }
+    render json: { recipe: @name, alcohol: @alcohol, ingredient: @ingredients }
 
   end
 end
