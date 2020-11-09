@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import cupcake from '../../../assets/images/cupcake.png'
 
@@ -23,7 +24,7 @@ export const Home = (props) => {
               <div className="fun-button">Sign Up</div>
             </div>
             <div className="cell large-3">
-              <div className="fun-button">Search</div>
+             <Link to="/search"><div className="fun-button">Search</div></Link> 
             </div>
           </div>
         </div>
