@@ -29,6 +29,10 @@ $topbar-center-logo-bg: $violet;
       color: $green-yellow-crayon;
       font-family: 'Indie Flower', cursive;
       font-size: 1.5rem;
+        
+      &:hover {
+        opacity: 80%;
+      }
     }
   }
 }

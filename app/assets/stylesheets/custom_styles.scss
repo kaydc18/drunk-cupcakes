@@ -20,6 +20,10 @@ body {
   padding: .5rem 1rem;
   border-radius: 10px;
   text-align: center;
+  
+  &:hover {
+    opacity: 80%;
+  }
 }
 
 .callout-purple {

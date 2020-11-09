@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import cupcake from '../../../assets/images/cupcake.png'
+import crunkcake from '../../../assets/images/crunkcake.png'
 
 export const Home = (props) => {
   return(
@@ -9,7 +9,7 @@ export const Home = (props) => {
       <div className="align-self-middle">
       <div className="grid-x grid-padding-x grid-padding-y grid-margin-x align-middle align-center">
         <div className="cell medium-4 text-center">
-          <img src={cupcake}/>
+          <img src={crunkcake}/>
         </div>
         <div className="cell auto callout-purple">
           <h1>Welcome to Drunk Cupcakes!</h1>
