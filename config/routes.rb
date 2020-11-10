@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :recipes, only: [:index, :show]
+      resource :recipes, only: [:show] do
+        resource :recipe_books, only: [:create]
+      end
+      
+      resource :users, only: [:show]
 
       post 'recipes/name_search', to: 'recipes#name_search'
       post 'ingredients/ingredient_search', to: 'ingredients#ingredient_search'
-
-      resources :users, only: [:show]
     end
   end
   get '*page', to: 'homes#index'

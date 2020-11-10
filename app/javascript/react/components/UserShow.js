@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
+import UserTile from './UserTile'
+
 const UserShow = (props) => {
+
   const [getUser, setUser] = useState({})
 
   const id = props.match.params.id
@@ -23,11 +26,16 @@ const UserShow = (props) => {
   .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-console.log(getUser)
+
+  let userInfo 
+  if (getUser) {
+   userInfo = <UserTile info={getUser} />
+  } 
+
   return(
     <div className="grid-container">
       <div className="grid-x">
-        <h1>Hello {getUser.first_name}!</h1>
+        {userInfo}
       </div>
     </div>
   )
