@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :recipes, only: [:index, :show]
 
       post 'recipes/name_search', to: 'recipes#name_search'
+      post 'ingredients/ingredient_search', to: 'ingredients#ingredient_search'
 
       resources :users, only: [:show]
     end
