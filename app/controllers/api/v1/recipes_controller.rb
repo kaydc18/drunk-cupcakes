@@ -2,13 +2,14 @@ require "faraday"
 
 class Api::V1::RecipesController < ApplicationController
   def name_search
+   
     @name_search = params['search_string'].gsub(" ", "_")
     @recipes = Recipe.where("drink_name ILIKE ?", "%#{@name_search}%")
     if @recipes === []
       response = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?s=#{params['search_string']}")
 
       parsed_response = JSON.parse(response.body)
-
+      
       drink = parsed_response["drinks"]
 
       drink.each do |drink|
