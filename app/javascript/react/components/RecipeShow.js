@@ -44,6 +44,9 @@ return (
         {frostingInfo}
         {batterInfo}
       </div>
+      <div className="cell large-12">
+        <div className="fun-button">Save Recipe To Account</div>
+      </div>
    </div>
   </div>
   )

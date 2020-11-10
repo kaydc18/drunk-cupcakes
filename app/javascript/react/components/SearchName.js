@@ -3,6 +3,11 @@ import React, { useState } from 'react'
 const SearchName = props => {
   const [searchNameQuery, setSearchNameQuery] = useState("");
 
+ const handleSubmit = (event) => {
+   event.preventDefault()
+   props.handleNameSubmit(searchNameQuery)
+ }
+
   const handleInputChange = event => {
     event.preventDefault();
     const value = event.currentTarget.value;
@@ -13,7 +18,7 @@ const SearchName = props => {
     return(
       <div className="callout-purple">
         <h2 className="text-center">Search By Cocktail Name</h2>
-        <form onSubmit={event => props.handleNameSubmit(event, searchNameQuery)}>
+        <form onSubmit={handleSubmit}>
         <label>Enter Drink Name
             <input onChange={handleInputChange} type="text" placeholder="Margarita" />
           </label>

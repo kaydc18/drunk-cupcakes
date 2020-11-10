@@ -7,12 +7,11 @@ import RecipeTile from './RecipeTile'
 export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
 
-  const handleNameSubmit = (event, searchNameQuery) => {
-    event.preventDefault(); 
+  const handleNameSubmit = (searchNameQuery) => {
     const body = JSON.stringify({
       search_string: `${searchNameQuery.trim()}`
     })
-    fetch("/api/v1/recipes/name_search", {
+    fetch("/api/v1/recipes/name_search.json", {
       method: 'POST',
       body: body,
       credentials: 'same-origin',
@@ -34,32 +33,32 @@ export const SearchIndex = () => {
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
-  const handleIngredientSubmit = (event, searchNameQuery) => {
-    event.preventDefault(); 
-    const body = JSON.stringify({
-      search_string: `${searchNameQuery.trim()}`
-    })
-    fetch("/api/v1/recipes/ingredient_search", {
-      method: 'POST',
-      body: body,
-      credentials: 'same-origin',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-    })
-      .then(response => {
-        if (response.ok) {
-          return response
-        } else {
-          const errorMessage = `${response.status} (${response.statusText})`;
-          const error = new Error(errorMessage);
-          throw (error);
-        }
-      })
-      .then(response => response.json())
-      .then(responseBody => {
-        setRecipe(responseBody);
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
-  }
+  // const handleIngredientSubmit = (event, searchIngredientQuery) => {
+  //   event.preventDefault(); 
+  //   const body = JSON.stringify({
+  //     search_string: `${searchNameQuery.trim()}`
+  //   })
+  //   fetch("/api/v1/recipes/ingredient_search", {
+  //     method: 'POST',
+  //     body: body,
+  //     credentials: 'same-origin',
+  //     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response
+  //       } else {
+  //         const errorMessage = `${response.status} (${response.statusText})`;
+  //         const error = new Error(errorMessage);
+  //         throw (error);
+  //       }
+  //     })
+  //     .then(response => response.json())
+  //     .then(responseBody => {
+  //       setRecipe(responseBody);
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`))
+  // }
 
   useEffect(() => {
     fetch("api/v1/recipes")
@@ -94,10 +93,10 @@ export const SearchIndex = () => {
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
         <div className="cell medium-6">
-          <SearchIngredient handleSubmit={handleIngredientSubmit} />
+
         </div>
         <div className="cell medium-6">
-          <SearchName handleSubmit={handleNameSubmit} />
+          <SearchName handleNameSubmit={handleNameSubmit} />
         </div>
         <div className="cell medium-12">
           <div className="callout-purple align-middle">
