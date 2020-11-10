@@ -5,7 +5,7 @@ class Api::V1::RecipesController < ApplicationController
     @name_search = params['search_string'].gsub(" ", "_")
     @recipes = Recipe.where("drink_name ILIKE ?", "%#{@name_search}%")
     if @recipes === []
-      response = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=#{params['search_string']}")
+      response = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?s=#{params['search_string']}")
 
       parsed_response = JSON.parse(response.body)
 
@@ -37,7 +37,7 @@ class Api::V1::RecipesController < ApplicationController
 
         ingredients.each do |ingredient|
           ingredient.each do |key, item|
-            ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=#{item}")
+            ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?i=#{item}")
         
             ingredient_response = JSON.parse(ingredient_search.body)
         
