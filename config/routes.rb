@@ -2,15 +2,14 @@ Rails.application.routes.draw do
   root 'homes#index'
   devise_for :users
 
-
   namespace :api do
     namespace :v1 do
       resources :recipes, only: [:index, :show]
-      resource :recipes, only: [:show] do
-        resource :recipe_books, only: [:create]
+      resources :recipes, only: [:show] do
+        resources :recipe_books, only: [:create]
       end
       
-      resource :users, only: [:show]
+      resources :users, only: [:show]
 
       post 'recipes/name_search', to: 'recipes#name_search'
       post 'ingredients/ingredient_search', to: 'ingredients#ingredient_search'

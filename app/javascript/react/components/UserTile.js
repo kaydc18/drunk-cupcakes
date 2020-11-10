@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserTile = (props) => {
   
-  return(<h1>Hello</h1>)
+  return(<h1>{props.first_name}</h1>)
 }
 
 export default UserTile

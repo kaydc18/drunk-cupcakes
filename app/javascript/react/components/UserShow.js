@@ -27,15 +27,11 @@ const UserShow = (props) => {
   }, [])
 
 
-  let userInfo 
-  if (getUser) {
-   userInfo = <UserTile info={getUser} />
-  } 
 
   return(
     <div className="grid-container">
       <div className="grid-x">
-        {userInfo}
+        <h1>{getUser.first_name}</h1>
       </div>
     </div>
   )
