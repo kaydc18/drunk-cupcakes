@@ -7,12 +7,11 @@ import RecipeTile from './RecipeTile'
 export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
 
-  const handleSubmit = (event, searchNameQuery) => {
-    event.preventDefault(); 
+  const handleNameSubmit = (searchNameQuery) => {
     const body = JSON.stringify({
       search_string: `${searchNameQuery.trim()}`
     })
-    fetch("/api/v1/recipes/name_search", {
+    fetch("/api/v1/recipes/name_search.json", {
       method: 'POST',
       body: body,
       credentials: 'same-origin',
@@ -70,7 +69,7 @@ export const SearchIndex = () => {
           <SearchIngredient />
         </div>
         <div className="cell medium-6">
-          <SearchName handleSubmit={handleSubmit} />
+          <SearchName handleNameSubmit={handleNameSubmit} />
         </div>
         <div className="cell medium-12">
           <div className="callout-purple align-middle">
