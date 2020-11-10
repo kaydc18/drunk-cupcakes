@@ -7,8 +7,35 @@ import RecipeTile from './RecipeTile'
 export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
 
+  const handleSubmit = (event, searchNameQuery) => {
+    event.preventDefault(); 
+    const body = JSON.stringify({
+      search_string: `${searchNameQuery.trim()}`
+    })
+    fetch("/api/v1/recipes/name_search.json", {
+      method: 'POST',
+      body: body,
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw (error);
+        }
+      })
+      .then(response => response.json())
+      .then(responseBody => {
+        setRecipe(responseBody);
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
   useEffect(() => {
-    fetch("api/v1/recipes#index")
+    fetch("api/v1/recipes")
       .then(response => {
         if (response.ok) {
           return response
@@ -43,7 +70,7 @@ export const SearchIndex = () => {
           <SearchIngredient />
         </div>
         <div className="cell medium-6">
-          <SearchName />
+          <SearchName handleSubmit={handleSubmit} />
         </div>
         <div className="cell medium-12">
           <div className="callout-purple align-middle">
