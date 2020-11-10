@@ -9,7 +9,9 @@ Rails.application.routes.draw do
         resources :recipe_books, only: [:create]
       end
       
-      resources :users, only: [:show]
+      resources :users, only: [:show] do
+        resources :recipe_books, only: [:show]
+      end
 
       post 'recipes/name_search', to: 'recipes#name_search'
       post 'ingredients/ingredient_search', to: 'ingredients#ingredient_search'
