@@ -29,10 +29,17 @@ drink.each do |drink|
     if key.start_with?("strIngredient") && item != nil
       ingredient_number = key.delete("strIngredient")
       ingredients << {"#{ingredient_number}": item}
-    elsif key.start_with?("strMeasure") && item != nil
-      measurement_number = key.delete("strMeasure")
-      measurements << {"#{measurement_number}": item}
     end
+    if key.start_with?("strMeasure")&& item != nil
+        measurement_number = key.delete("strMeasure")
+        measurements << {"#{measurement_number}": item}
+    end
+  end
+  
+  while measurements.length < ingredients.length
+    measurement_number = measurements.length
+    measurement_number += 1
+    measurements << {"#{measurement_number}": "none"}
   end
   
   recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}")
@@ -57,7 +64,7 @@ drink.each do |drink|
         else
           ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
         end
-         measurements.each do |measure|
+        measurements.each do |measure|
           measure.each do |measure_key, measure_item|
             if measure_key === key
               Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient)
@@ -70,10 +77,5 @@ drink.each do |drink|
 end
 
 
-
-
-
-
-binding.pry
 
 

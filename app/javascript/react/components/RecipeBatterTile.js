@@ -4,9 +4,7 @@ const RecipeBatterTile = (props) => {
  
 const ingredientsArray = props.ingredient.map((ingredient) => {
 
-  let newIngredient = ingredient.split(",")
-
-    return(<li key={ingredient}>{newIngredient[0]}</li>)
+    return(<li key={ingredient}>{ingredient}</li>)
   })
 
   return(

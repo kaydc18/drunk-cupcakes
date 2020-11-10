@@ -8,7 +8,7 @@ export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
 
   useEffect(() => {
-    fetch("api/v1/recipes#index")
+    fetch("api/v1/recipes")
       .then(response => {
         if (response.ok) {
           return response
