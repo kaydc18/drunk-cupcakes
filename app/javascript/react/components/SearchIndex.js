@@ -12,7 +12,7 @@ export const SearchIndex = () => {
     const body = JSON.stringify({
       search_string: `${searchNameQuery.trim()}`
     })
-    fetch("/api/v1/recipes/name_search.json", {
+    fetch("/api/v1/recipes/name_search", {
       method: 'POST',
       body: body,
       credentials: 'same-origin',
