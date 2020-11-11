@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 
 import RecipeFrostingTile from './RecipeFrostingTile'
 import RecipeBatterTile from './RecipeBatterTile'
+import HandlingInfoTile from './HandlingInfoTile'
 
 const RecipeShow = props => {
-  
+ 
   const [newRecipe, setNewRecipe] = useState({})
   const [recipeSave, setRecipeSave] = useState({})
+  const [errorList, setErrorList] = useState({})
 
   const id = props.match.params.id
 
@@ -45,7 +47,7 @@ const RecipeShow = props => {
     const body = JSON.stringify({
       recipe: `${id}`
     })
-    fetch("/api/v1/recipes/recipe_books", {
+    fetch(`/api/v1/recipes/${id}/recipe_books`, {
       method: 'POST',
       body: body,
       credentials: 'same-origin',
@@ -62,9 +64,20 @@ const RecipeShow = props => {
       })
       .then(response => response.json())
       .then(responseBody => {
-        setRecipeSave(responseBody);
+        if (responseBody.info) {
+          setErrorList(responseBody)
+        } else {
+          setRecipeSave(responseBody);
+          setErrorList(responseBody.info)
+        }
+
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
+  let saveInfo
+  if (errorList) {
+    saveInfo = <HandlingInfoTile info={errorList.info} user={errorList.user} />
   }
 
 return (
@@ -74,13 +87,11 @@ return (
         <h1 className="text-center">{newRecipe.recipe} Cupcakes</h1>
         {frostingInfo}
         {batterInfo}
-        <div className="grid-x grid-margin-x grid-margin-y">
-          <div className="cell large-6">
+        <div className="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
+          <div className="cell medium-6 large-6">
             <div className="fun-button" onClick={handleSave}>Save Recipe</div>
           </div>
-          <div className="cell large-6">
-            <Link to="/users/:id"><div className="fun-button">Visit Account</div></Link>
-          </div>
+            {saveInfo}
         </div>
       </div>
    </div>

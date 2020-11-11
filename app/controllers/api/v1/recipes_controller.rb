@@ -78,6 +78,8 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def show
+    user_id = current_user.id
+
     @recipe = Recipe.find(params[:id])
     recipe_id = @recipe.id
     @name = @recipe.drink_name
