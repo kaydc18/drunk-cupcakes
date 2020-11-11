@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom' 
 
 import RecipeFrostingTile from './RecipeFrostingTile'
 import RecipeBatterTile from './RecipeBatterTile'
@@ -14,9 +13,7 @@ const RecipeShow = props => {
   const id = props.match.params.id
 
   useEffect(() => {
-    fetch(`/api/v1/recipes/${id}`, {
-      credentials: "same-origin"
-    })
+    fetch(`/api/v1/recipes/${id}`)
     .then(response => {
       if (response.ok) {
         return response
@@ -79,7 +76,7 @@ const RecipeShow = props => {
   if (errorList) {
     saveInfo = <HandlingInfoTile info={errorList.info} user={errorList.user} />
   }
-
+ 
 return (
   <div className="grid-container">
     <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
