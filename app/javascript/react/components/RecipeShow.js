@@ -91,7 +91,9 @@ return (
           <div className="cell medium-6 large-6">
             <div className="fun-button" onClick={handleSave}>Save Recipe</div>
           </div>
-            {saveInfo}
+        </div>
+        <div className="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y"> 
+          {saveInfo}
         </div>
       </div>
    </div>
