@@ -34,7 +34,7 @@
       <ul class="menu vertical medium-horizontal">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></button></li>
-          <li><a href="/users/<%= @user_id %>">Account</a></li>
+          <li><a href="/users/<%= current_user.id %>">Account</a></li>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path %></button></li>
           <li><%= link_to 'Sign In', new_user_session_path %></button></li>
