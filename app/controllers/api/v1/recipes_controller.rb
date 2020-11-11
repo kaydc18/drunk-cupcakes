@@ -2,7 +2,6 @@ require "faraday"
 
 class Api::V1::RecipesController < ApplicationController
   def name_search
-   
     @name_search = params['search_string'].gsub(" ", "_")
     @recipes = Recipe.where("drink_name ILIKE ?", "%#{@name_search}%")
     if @recipes === []
@@ -79,6 +78,8 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def show
+    user_id = current_user.id
+
     @recipe = Recipe.find(params[:id])
     recipe_id = @recipe.id
     @name = @recipe.drink_name

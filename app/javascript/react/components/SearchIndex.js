@@ -33,8 +33,37 @@ export const SearchIndex = () => {
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
+  // const handleIngredientSubmit = (event, searchIngredientQuery) => {
+  //   event.preventDefault(); 
+  //   const body = JSON.stringify({
+  //     search_string: `${searchNameQuery.trim()}`
+  //   })
+  //   fetch("/api/v1/recipes/ingredient_search", {
+  //     method: 'POST',
+  //     body: body,
+  //     credentials: 'same-origin',
+  //     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response
+  //       } else {
+  //         const errorMessage = `${response.status} (${response.statusText})`;
+  //         const error = new Error(errorMessage);
+  //         throw (error);
+  //       }
+  //     })
+  //     .then(response => response.json())
+  //     .then(responseBody => {
+  //       setRecipe(responseBody);
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`))
+  // }
+
   useEffect(() => {
-    fetch("api/v1/recipes")
+    fetch("api/v1/recipes", {
+      credentials: "same-origin"
+    })
       .then(response => {
         if (response.ok) {
           return response
@@ -66,7 +95,7 @@ export const SearchIndex = () => {
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
         <div className="cell medium-6">
-          <SearchIngredient />
+
         </div>
         <div className="cell medium-6">
           <SearchName handleNameSubmit={handleNameSubmit} />
