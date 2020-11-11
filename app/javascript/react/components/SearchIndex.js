@@ -61,7 +61,9 @@ export const SearchIndex = () => {
   // }
 
   useEffect(() => {
-    fetch("api/v1/recipes")
+    fetch("api/v1/recipes", {
+      credentials: "same-origin"
+    })
       .then(response => {
         if (response.ok) {
           return response

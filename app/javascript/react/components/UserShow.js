@@ -9,7 +9,9 @@ const UserShow = (props) => {
   const id = props.match.params.id
 
   useEffect(() => {
-    fetch(`/api/v1/users/${id}`)
+    fetch(`/api/v1/users/${id}`, {
+      credentials: "same-origin"
+    })
     .then(response => {
       if (response.ok) {
         return response

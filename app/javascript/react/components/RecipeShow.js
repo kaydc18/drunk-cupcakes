@@ -12,7 +12,9 @@ const RecipeShow = props => {
   const id = props.match.params.id
 
   useEffect(() => {
-    fetch(`/api/v1/recipes/${id}`)
+    fetch(`/api/v1/recipes/${id}`, {
+      credentials: "same-origin"
+    })
     .then(response => {
       if (response.ok) {
         return response
