@@ -6,7 +6,7 @@ const RecipeBookItems = (props) => {
   
   return(
     <ul>
-      <Link to={`recipe_book/${props.link}`}><li>{props.name}</li></Link>
+      <Link to={`recipe_book/${props.link}`}><li className="drinks">{props.name}</li></Link>
     </ul>
   )
 }

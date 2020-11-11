@@ -67,10 +67,7 @@ export const SearchIndex = () => {
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
-        <div className="cell medium-6">
-
-        </div>
-        <div className="cell medium-6">
+        <div className="cell large-12">
           <SearchName handleNameSubmit={handleNameSubmit} />
         </div>
         <div className="cell medium-12">
