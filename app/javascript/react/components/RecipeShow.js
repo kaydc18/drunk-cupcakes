@@ -54,6 +54,9 @@ const RecipeShow = props => {
         if (response.ok) {
           return response
         } else {
+          if (response.status === 401) {
+            setErrorList({info: "you need to be logged in to save recipes"})
+          }
           const errorMessage = `${response.status} (${response.statusText})`;
           const error = new Error(errorMessage);
           throw (error);

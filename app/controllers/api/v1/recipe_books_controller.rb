@@ -15,7 +15,7 @@ class Api::V1::RecipeBooksController < ApplicationController
       if recipe_book.save
         render json: {info: "this has been added to your recipe book" , user: @user_id }
       else
-        render json: {info: recipe_book.errors.full_messages}, status: 400
+        render json: {info: "you need to be logged in to save recipes"}
       end
     else
       render json: {info: "this is in your recipe book already", user: @user_id }
