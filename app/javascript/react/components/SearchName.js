@@ -19,7 +19,7 @@ const SearchName = props => {
       <div className="callout-purple">
         <h2 className="text-center">Search By Cocktail Name</h2>
         <form onSubmit={handleSubmit}>
-        <label>Enter Drink Name
+        <label className="search-label">Enter Drink Name
             <input onChange={handleInputChange} type="text" placeholder="Margarita" />
           </label>
           <input type="submit" className="button" value="Search" />

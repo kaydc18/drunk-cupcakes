@@ -32,5 +32,21 @@ body {
   border: 1px solid $space-cadet;
   padding: 2rem;
   margin: 2rem;
-  min-height: 400px;
+
+  ul {
+    .drinks {
+      list-style: none;
+      text-align: center;
+      font-size: 1.3rem;
+      font-family: 'Raleway', sans-serif;
+    }
+  }
 }
+
+
+  .search-label {
+    font-size: 1.3rem;
+    font-family: 'Raleway', sans-serif;
+    color: $middle-blue;
+  }
+
