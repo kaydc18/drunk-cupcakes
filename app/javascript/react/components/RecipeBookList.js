@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import RecipeBookList from './RecipeBookList'
+import RecipeBookItems from './RecipeBookItems'
 
-const UserShow = (props) => {
-
-  const [getUser, setUser] = useState({})
-
-  const id = props.match.params.id
+const RecipeBookList = (props) => {
+  const [recipeBook, setRecipeBook] = useState([])
 
   useEffect(() => {
-    fetch(`/api/v1/users/${id}`, {
+    fetch(`/api/v1/users/${props.info}/recipe_books`, {
       credentials: "same-origin"
     })
     .then(response => {
@@ -23,21 +20,20 @@ const UserShow = (props) => {
     })
     .then(response => response.json())
     .then(responseBody => {
-      setUser(responseBody);  
+      setRecipeBook(responseBody);  
     })
   .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-
+  const recipeBookArray = recipeBook.map((recipe) => {
+    return(<RecipeBookItems key={recipe.id} name={recipe.name} link={recipe.id} />)
+  })
 
   return(
-    <div className="grid-container">
-      <div className="grid-x">
-        <h1>Hello {getUser.first_name}!</h1>
-        <RecipeBookList info={id}/>
-      </div>
+    <div className="cell large-12">
+        {recipeBookArray}
     </div>
   )
 }
 
-export default UserShow
+export default RecipeBookList

@@ -5,6 +5,7 @@ import Home from './Home'
 import SearchIndex from './SearchIndex'
 import RecipeShow from './RecipeShow'
 import UserShow from './UserShow'
+import RecipeBookShow from './RecipeBookShow'
 
 
 export const App = (props) => {
@@ -15,6 +16,7 @@ export const App = (props) => {
         <Route exact path="/search" component={SearchIndex}/>
         <Route exact path="/recipe/:id" component={RecipeShow}/>
         <Route exact path="/users/:id" component={UserShow} />
+        <Route exact path="/users/recipe_book/:id" component={RecipeBookShow} />
       </Switch> 
   </BrowserRouter>
   )
