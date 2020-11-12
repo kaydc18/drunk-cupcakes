@@ -44,13 +44,20 @@
   </div>
   <!-- /medium and larger nav bar -->
 
-  <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
-    </div>
-  <%- end -%>
+  <div class="grid-container fluid">
+    <div class="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
 
-  <%= yield %>
+      <%- flash.each do |key, value| -%>
+        <div class="cell large-12 text-center flash flash-<%= key %>">
+          <%= value %>
+        </div>
+      <%- end -%>
+ 
+    </div>
+
+    <%= yield %>
+
+    </div>
 
   <%= javascript_include_tag 'application' %>
   
