@@ -2,18 +2,18 @@ require "faraday"
 
 class Api::V1::RecipesController < ApplicationController
   def name_search
+    # eleminate @ symbols
+    #.rb file that will handle online query string... search model .get-create a class
     @name_search = params['search_string'].gsub(" ", "_")
+
     @recipes = Recipe.where("drink_name ILIKE ?", "%#{@name_search}%")
+
     if @recipes === []
+      #search poro goes here
       response = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?s=#{params['search_string']}")
 
-
       parsed_response = JSON.parse(response.body)
-
-      if parsed_response["drinks"] === nil
-        render json: {error: "This recipe doesn't exist"}
-      end
-      
+      #should be drinks plural
       drink = parsed_response["drinks"]
 
       drink.each do |drink|
@@ -31,6 +31,7 @@ class Api::V1::RecipesController < ApplicationController
               measurements << {"#{measurement_number}": item}
           end
         end
+        #defaul value on database
         
         while measurements.length < ingredients.length
           measurement_number = measurements.length
@@ -42,6 +43,7 @@ class Api::V1::RecipesController < ApplicationController
 
         ingredients.each do |ingredient|
           ingredient.each do |key, item|
+            #add a search model call
             ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?i=#{item}")
         
             ingredient_response = JSON.parse(ingredient_search.body)
@@ -55,11 +57,14 @@ class Api::V1::RecipesController < ApplicationController
               else
                 ingredient_alcohol = false
               end
+              #broken down to find or create by active record
               if Ingredient.find_by(ingredient_id: "#{ingredient_id}") != nil
+                #why
                 ingredient = Ingredient.find_by(ingredient_id: "#{ingredient_id}") 
               else
                 ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
               end
+
               measurements.each do |measure|
                 measure.each do |measure_key, measure_item|
                   if measure_key === key
@@ -86,10 +91,12 @@ class Api::V1::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     recipe_id = @recipe.id
     @name = @recipe.drink_name
+    #double check these arrays
     @ingredient_full = []
     @alcohol = []
     @ingredients = []
     @measurements = []
+
     @measurement_full = Measurement.where(recipe: "#{recipe_id}")
     @measurement_full.each do |measurement|
       @measurements << measurement.measurement

@@ -21,7 +21,7 @@ export const SearchIndex = () => {
         if (response.ok) {
           return response
         } else {
-          setErrorList({info: "this recip doesn't exist, please try another"})
+          setErrorList({info: "this recipe doesn't exist, please try another"})
           const errorMessage = `${response.status} (${response.statusText})`;
           const error = new Error(errorMessage);
           throw (error);
@@ -74,8 +74,10 @@ export const SearchIndex = () => {
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y align-middle align-center">
-        <div className="cell large-12 text-center">
+        <div className="cell large-12 text-center align-self-bottom">
           {errorInfo}
+        </div>
+        <div className="cell large-12">
           <SearchName handleNameSubmit={handleNameSubmit} />
         </div>
         <div className="cell medium-12">
