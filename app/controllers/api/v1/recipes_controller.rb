@@ -7,7 +7,12 @@ class Api::V1::RecipesController < ApplicationController
     if @recipes === []
       response = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?s=#{params['search_string']}")
 
+
       parsed_response = JSON.parse(response.body)
+
+      if parsed_response["drinks"] === nil
+        render json: {error: "This recipe doesn't exist"}
+      end
       
       drink = parsed_response["drinks"]
 
@@ -70,15 +75,14 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     render json: @recipes
-
   end
+
   def index
     @recipes = Recipe.all
     render json: @recipes
   end
 
   def show
-  
     @recipe = Recipe.find(params[:id])
     recipe_id = @recipe.id
     @name = @recipe.drink_name
