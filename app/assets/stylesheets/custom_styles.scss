@@ -43,6 +43,16 @@ body {
   }
 }
 
+.icons {
+  img {
+    width: 32px;
+    
+    &:hover {
+      opacity: 80%;
+    }
+  }
+
+}
 
   .search-label {
     font-size: 1.3rem;
