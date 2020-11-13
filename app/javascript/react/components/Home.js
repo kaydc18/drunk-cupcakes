@@ -13,7 +13,7 @@ export const Home = (props) => {
           </div>
           <div className="cell auto callout-purple">
             <h1>Welcome to Drunk Cupcakes!</h1>
-            <h3>Now you can eat your booze! Just search for a drink or ingredient of choice and receive a cupcake recipe of that drink!</h3>
+            <h3>Now you can eat your booze! Just search for your favorite cocktail and receive a cupcake recipe of that drink!</h3>
             <div className="grid-x align-center align-bottom">
               <div className="cell medium-6">
                <Link to="/search"><div className="fun-button">Search</div></Link>
