@@ -42,7 +42,11 @@ const RecipeBookShow = (props) => {
     <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
       <div className="cell large-12">
         <h1 className="text-center">{newRecipe.recipe} Cupcakes</h1>
+      </div>
+      <div className="cell large-12">
         {frostingInfo}
+      </div>
+      <div className="cell large-12">
         {batterInfo}
       </div>
     </div>
