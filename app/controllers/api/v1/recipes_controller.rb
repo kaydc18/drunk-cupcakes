@@ -68,33 +68,35 @@ class Api::V1::RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     recipe_id = @recipe.id
-    @name = @recipe.drink_name
-    #double check these arrays
-    @ingredient_full = []
-    @alcohol = []
-    @ingredients = []
-    @measurements = []
+    name = @recipe.drink_name
 
-    @measurement_full = Measurement.where(recipe: "#{recipe_id}")
-    @measurement_full.each do |measurement|
+    @measurements = []
+    ingredient_search = []
+    @alcohol_ingredients = []
+    @non_alcohol_ingredients = []
+
+    measurement_search = Measurement.where(recipe: "#{recipe_id}")
+
+    measurement_search.each do |measurement|
       @measurements << measurement.measurement
       measurement_id = measurement.ingredient_id
-      @ingredient_full << Ingredient.find_by(id: "#{measurement_id}")
+      ingredient_search << Ingredient.find_by(id: "#{measurement_id}")
     end
-    @ingredient_full.each_with_index do |ingredient, ingredient_index|
-      @measurements.each_with_index do |measurement, index|
-        if ingredient_index === index
+
+    ingredient_search.each_with_index do |ingredient, ingredient_index|
+      @measurements.each_with_index do |measurement, measurement_index|
+        if ingredient_index === measurement_index
           if ingredient.ingredient_alcohol === true
             measurement_num = measurement.gsub("oz", ",").gsub("cl", ",").gsub("shot", ",").gsub("measures", ",")
-            @alcohol << "#{measurement_num} #{ingredient.ingredient_name}"
+            @alcohol_ingredients << "#{measurement_num} #{ingredient.ingredient_name}"
           else
-            @ingredients << "#{measurement_num} #{ingredient.ingredient_name}"
+            @non_alcohol_ingredients << "#{measurement_num} #{ingredient.ingredient_name}"
           end
         end
       end
     end
 
-    render json: { recipe: @name, alcohol: @alcohol, ingredient: @ingredients }
+    render json: { recipe: name, alcohol: @alcohol_ingredients, ingredient: @non_alcohol_ingredients }
 
   end
 end

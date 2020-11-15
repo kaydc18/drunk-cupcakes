@@ -1,9 +1,4 @@
 class SortIngredient
-  def inintialize
-    
-
-  end
-
   def ingredients_sort(drink)
     @ingredients = []
     drink.each do |key, item|
