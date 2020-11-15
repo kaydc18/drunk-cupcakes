@@ -2,25 +2,21 @@ require "faraday"
 
 class Api::V1::RecipesController < ApplicationController
   def name_search
-    # eleminate @ symbols
-    #.rb file that will handle online query string... search model .get-create a class
     @name_search = params['search_string'].gsub(" ", "_")
 
     @recipes = Recipe.where("drink_name ILIKE ?", "%#{@name_search}%")
 
     if @recipes === []
-      #search poro goes here
-      response = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?s=#{params['search_string']}")
+      query = @name_search
+      search = Search.new
+      drinks = search.retrieve_drinks(query)
 
-      parsed_response = JSON.parse(response.body)
-      #should be drinks plural
-      drink = parsed_response["drinks"]
-
-      drink.each do |drink|
-        ingredients = []
-        measurements = []
+      drinks.each do |drink|
         drink_id = drink["idDrink"]
         drink_name = drink["strDrink"]
+
+        ingredients = []
+        measurements = []
         drink.each do |key, item|
           if key.start_with?("strIngredient") && item != nil
             ingredient_number = key.delete("strIngredient")
@@ -31,7 +27,6 @@ class Api::V1::RecipesController < ApplicationController
               measurements << {"#{measurement_number}": item}
           end
         end
-        #defaul value on database
         
         while measurements.length < ingredients.length
           measurement_number = measurements.length
@@ -43,12 +38,12 @@ class Api::V1::RecipesController < ApplicationController
 
         ingredients.each do |ingredient|
           ingredient.each do |key, item|
-            #add a search model call
-            ingredient_search = Faraday.get("https://www.thecocktaildb.com/api/json/v2/#{ENV['COCKTAIL_DB']}/search.php?i=#{item}")
+
+            ingredients_query = item
+            search = Search.new
+            ingredients = search.retrieve_ingredients(ingredients_query)
         
-            ingredient_response = JSON.parse(ingredient_search.body)
-        
-            ingredient_response["ingredients"].each do |ingredient|
+            ingredients.each do |ingredient|
               ingredient_id = ingredient["idIngredient"]
               ingredient_name = ingredient["strIngredient"]
               
@@ -57,13 +52,8 @@ class Api::V1::RecipesController < ApplicationController
               else
                 ingredient_alcohol = false
               end
-              #broken down to find or create by active record
-              if Ingredient.find_by(ingredient_id: "#{ingredient_id}") != nil
-                #why
-                ingredient = Ingredient.find_by(ingredient_id: "#{ingredient_id}") 
-              else
-                ingredient = Ingredient.create(ingredient_id: "#{ingredient_id}", ingredient_name: "#{ingredient_name}", ingredient_alcohol: "#{ingredient_alcohol}")
-              end
+ 
+              ingredient = Ingredient.find_or_create_by(ingredient_id: "#{ingredient_id}")
 
               measurements.each do |measure|
                 measure.each do |measure_key, measure_item|
