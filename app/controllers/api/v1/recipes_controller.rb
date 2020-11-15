@@ -14,51 +14,39 @@ class Api::V1::RecipesController < ApplicationController
       drinks.each do |drink|
         drink_id = drink["idDrink"]
         drink_name = drink["strDrink"]
+        drink_image = drink["strDrinkThumb"]
 
-        ingredients = []
-        measurements = []
-        drink.each do |key, item|
-          if key.start_with?("strIngredient") && item != nil
-            ingredient_number = key.delete("strIngredient")
-            ingredients << {"#{ingredient_number}": item}
-          end
-          if key.start_with?("strMeasure")&& item != nil
-              measurement_number = key.delete("strMeasure")
-              measurements << {"#{measurement_number}": item}
-          end
-        end
-        
-        while measurements.length < ingredients.length
-          measurement_number = measurements.length
-          measurement_number += 1
-          measurements << {"#{measurement_number}": "none"}
-        end
-        
-        recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}")
+        recipe = Recipe.create(drink_id: "#{drink_id}", drink_name: "#{drink_name}", drink_image: "#{drink_image}")
+
+        sort_ingredient = SortIngredient.new
+        ingredients = sort_ingredient.ingredients_sort(drink)
+        measurements = sort_ingredient.measurements_sort(drink)
 
         ingredients.each do |ingredient|
           ingredient.each do |key, item|
-
             ingredients_query = item
             search = Search.new
-            ingredients = search.retrieve_ingredients(ingredients_query)
+            ingredients_new_query = search.retrieve_ingredients(ingredients_query)
         
-            ingredients.each do |ingredient|
+            ingredients_new_query.each do |ingredient|
               ingredient_id = ingredient["idIngredient"]
-              ingredient_name = ingredient["strIngredient"]
+              @ingredient_name = ingredient["strIngredient"]
               
               if ingredient["strAlcohol"] === "Yes"
-                ingredient_alcohol = true
+                @ingredient_alcohol = true
               else
-                ingredient_alcohol = false
+                @ingredient_alcohol = false
               end
  
-              ingredient = Ingredient.find_or_create_by(ingredient_id: "#{ingredient_id}")
+              ingredient_new = Ingredient.where(ingredient_id: "#{ingredient_id}").first_or_create do |ingredient_new|
+                  ingredient_new.ingredient_name = @ingredient_name
+                  ingredient_new.ingredient_alcohol = @ingredient_alcohol
+              end
 
               measurements.each do |measure|
                 measure.each do |measure_key, measure_item|
                   if measure_key === key
-                    Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient)
+                    Measurement.create(measurement: "#{measure_item}", recipe: recipe, ingredient: ingredient_new)
                   end
                 end
               end
