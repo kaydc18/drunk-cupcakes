@@ -37,7 +37,7 @@ const UserShow = (props) => {
           <h1>Hello {getUser.first_name}!</h1>
         </div>
         <div className="cell large-12 text-center">
-          <h3>Here are your saved recipes!</h3>
+          <h3>Here are your favorite recipes!</h3>
           <RecipeBookList info={id}/>
         </div>
       </div>

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 
 const RecipeBookItems = (props) => {
 
-  
   return(
-    <ul>
-      <Link to={`recipe_book/${props.link}`}><li className="drinks">{props.name}</li></Link>
-    </ul>
+    <Link to={`recipe_book/${props.link}`}>
+      <div className="drink-item text-center">
+        <img src={props.image}/>
+        <h5 className="drinks">{props.name}</h5>
+      </div>
+  </Link>
   )
 }
 

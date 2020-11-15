@@ -25,14 +25,22 @@ const RecipeBookList = (props) => {
   .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  const recipeBookArray = recipeBook.map((recipe) => {
-    return(<RecipeBookItems key={recipe.id} name={recipe.name} link={recipe.id} />)
+  const recipeBookArray = recipeBook.map((recipe) =>
+  {
+    return(<RecipeBookItems key={recipe.id} name={recipe.name} image={recipe.recipe_image} link={recipe.id} />)
   })
 
   return(
     <div className="cell large-12">
-        {recipeBookArray}
+      <div className="grid-x">
+        <div className="cell large-12">
+          <div className="drink-list">
+          {recipeBookArray}
+          </div>
+        </div>
+      </div>
     </div>
+
   )
 }
 
