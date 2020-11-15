@@ -52,7 +52,6 @@ body {
   }
 
 }
-
   .search-label {
     font-size: 1.3rem;
     font-family: 'Raleway', sans-serif;
@@ -65,3 +64,35 @@ body {
     margin: auto;
   }
 
+  .drink-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+
+    .drink-item {
+      max-width: 200px;
+      margin: 1rem;
+
+      &:hover {
+        opacity: 75%;
+      }
+    }
+  }
+
+  .search-button {
+    background-color: $green-yellow-crayon;
+    box-shadow: 6px 6px 0px 4px $space-cadet,
+    inset 1px 1px 0px 3px $pacific-blue;
+    color: $pacific-blue;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: 'Indie Flower', cursive;
+    
+    &:hover {
+      opacity: 80%;
+    }
+  }

@@ -61,10 +61,12 @@ export const SearchIndex = () => {
   }, [])
   
   const recipeTileArray = getRecipe.map((recipe) => {
+   
     return(
       <RecipeTile
         name={recipe.drink_name}
-        drink_id={recipe.drink_id}
+        drinkId={recipe.drink_id}
+        drinkImage={recipe.drink_image}
         id={recipe.id}
         key={recipe.id}
       />
@@ -80,9 +82,15 @@ export const SearchIndex = () => {
         <div className="cell large-12">
           <SearchName handleNameSubmit={handleNameSubmit} />
         </div>
-        <div className="cell medium-12">
-          <div className="callout-purple align-middle">
-            {recipeTileArray}
+        <div className="cell large-12">
+          <div className="callout-purple">
+            <div className="grid-x">
+              <div className="cell large-12">
+                <div className="drink-list">
+                  {recipeTileArray}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

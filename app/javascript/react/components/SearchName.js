@@ -22,7 +22,7 @@ const SearchName = props => {
         <label className="search-label">Enter Drink Name
             <input onChange={handleInputChange} type="text" placeholder="Margarita" />
           </label>
-          <input type="submit" className="button" value="Search" />
+          <input type="submit" className="search-button" value="Search" />
         </form>
       </div>
     )
