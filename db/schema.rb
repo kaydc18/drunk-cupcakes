@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_173137) do
   create_table "recipes", force: :cascade do |t|
     t.bigint "drink_id", null: false
     t.string "drink_name", null: false
+    t.text "drink_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

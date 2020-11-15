@@ -85,19 +85,26 @@ return (
     <div className="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
       <div className="cell large-12">
         <h1 className="text-center">{newRecipe.recipe} Cupcakes</h1>
+      </div>
+      <div className="cell large-12">
         {frostingInfo}
+      </div>
+      <div className="cell large-12">
         {batterInfo}
+      </div>
+      <div className="cell large-12">
         <div className="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
           <div className="cell medium-6 large-6">
             <div className="fun-button" onClick={handleSave}>Save Recipe</div>
-          </div>
+           </div>
         </div>
         <div className="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y"> 
           {saveInfo}
         </div>
       </div>
-   </div>
+    </div>
   </div>
+
   )
 }
 

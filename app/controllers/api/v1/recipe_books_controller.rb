@@ -38,7 +38,7 @@ class Api::V1::RecipeBooksController < ApplicationController
     recipes_list.each do |recipe|
       recipe_book_id = recipe[:recipe_book_id]
       recipe_info = recipe[:recipe]
-      @recipe_names << {name: recipe_info.drink_name, id: recipe_book_id}
+      @recipe_names << {name: recipe_info.drink_name, recipe_image: recipe_info.drink_image, id: recipe_book_id}
     end
 
     render json: @recipe_names
