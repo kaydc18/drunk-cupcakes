@@ -58,10 +58,15 @@ body {
     color: $middle-blue;
   }
 
-  .flash-alert {
+  .flash {
     font-size: 1.3rem;
     font-family: 'Indie Flower', cursive;
     margin: auto;
+  }
+
+  #fadeout {
+    opacity: 1;
+    transition: 1s opacity;
   }
 
   .drink-list {
