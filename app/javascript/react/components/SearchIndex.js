@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import SearchName from './SearchName'
 import RecipeTile from './RecipeTile'
-import SearchError from './SearchError'
 
 export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
@@ -38,7 +37,7 @@ export const SearchIndex = () => {
 
   let errorInfo
   if (errorList) {
-    errorInfo = <SearchError searchError={errorList.info} />
+    errorInfo = <h3>{errorList.info}</h3>
   }
 
 
