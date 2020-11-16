@@ -30,13 +30,14 @@ export const SearchIndex = () => {
       .then(response => response.json())
       .then(responseBody => {
         setRecipe(responseBody);
+        setErrorList();
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   let errorInfo
   if (errorList) {
-    errorInfo = <h3>{errorList.info}</h3> 
+    errorInfo = <h3>{errorList.info}</h3>
   }
 
 

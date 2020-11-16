@@ -1,5 +1,5 @@
 window.onload = function() {
-  window.setTimeout(fadeout, 3000);
+  window.setTimeout(fadeout, 2000);
 }
 
 function fadeout() {

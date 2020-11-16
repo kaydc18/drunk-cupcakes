@@ -65,7 +65,7 @@ class Api::V1::RecipeBooksController < ApplicationController
       @measurements.each_with_index do |measurement, index|
         if ingredient_index === index
           if ingredient.ingredient_alcohol === true
-            measurement_num = measurement.gsub("oz", ",").gsub("cl", ",").gsub("shot", ",").gsub("measures", ",")
+            measurement_num = measurement.gsub("oz", ",").gsub("cl", ",").gsub("shot", ",").gsub("measures", ",").gsub("ml", ",")
             @alcohol << "#{measurement_num} #{ingredient.ingredient_name}"
           else
             @ingredients << "#{measurement_num} #{ingredient.ingredient_name}"

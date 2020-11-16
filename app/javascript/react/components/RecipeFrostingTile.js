@@ -22,7 +22,7 @@ const alcoholArray = props.alcohol.map((ingredient) => {
       <ul>
         <li>Cream room temperature butter with a hand mixer, the paddle attachment of a stand mixer, or a wooden spoon until smooth and fluffy.</li>
         <li>Gradually beat in confectioners' sugar until fully incorporated.</li>
-        <li>Pour in liquids and beat for an additional 3 to 4 minutes.If it's not soft enough, add more liquid.</li>
+        <li>Pour in liquids and beat for an additional 3 to 4 minutes. If it's not soft enough, add more liquid.</li>
         <li>Add food coloring, if using, and beat for thirty seconds until smooth or until desired color is reached.</li>
       </ul>
     </div>
