@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 const SearchName = props => {
+
   const [searchNameQuery, setSearchNameQuery] = useState("");
 
  const handleSubmit = (event) => {

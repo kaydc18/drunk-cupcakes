@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import SearchName from './SearchName'
 import RecipeTile from './RecipeTile'
+import SearchError from './SearchError'
 
 export const SearchIndex = () => {
   const [getRecipe, setRecipe] = useState([])
@@ -30,13 +31,14 @@ export const SearchIndex = () => {
       .then(response => response.json())
       .then(responseBody => {
         setRecipe(responseBody);
+        setErrorList();
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   let errorInfo
   if (errorList) {
-    errorInfo = <h3>{errorList.info}</h3> 
+    errorInfo = <SearchError searchError={errorList.info} />
   }
 
 
