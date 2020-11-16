@@ -44,13 +44,11 @@
   </div>
   <!-- /medium and larger nav bar -->
 
-
-      <%- flash.each do |key, value| -%>
-        <div class="cell large-12 text-center flash flash-<%= key %>">
+       <%- flash.each do |key, value| -%>
+        <div id="fadeout" class="cell large-12 text-center flash flash-<%= key %>">
           <%= value %>
         </div>
       <%- end -%>
- 
 
     <%= yield %>
 
