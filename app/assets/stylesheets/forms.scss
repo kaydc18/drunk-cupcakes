@@ -1,0 +1,75 @@
+@import 'settings';
+
+form {
+
+  label {
+    font-size: 1.3rem;
+    font-family: 'Raleway', sans-serif;
+    color: $middle-blue;
+  }
+  [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.4375rem;
+    margin: 0 0 .5rem;
+    padding: 0.5rem;
+    border: 1px solid $pacific-blue;
+    border-radius: 7px;
+    background-color: $middle-blue;
+    box-shadow: inset -1px -1px 0px 2px $pacific-blue;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1rem;
+    color: $space-cadet;
+    transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+    appearance: none;
+}
+::placeholder {
+  color: $pacific-blue;
+}
+
+  .button {
+    background-color: $green-yellow-crayon;
+    box-shadow: 6px 6px 0px 4px $space-cadet,
+    inset 1px 1px 0px 3px $pacific-blue;
+    color: $pacific-blue;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: 'Indie Flower', cursive;
+    
+    &:hover {
+      opacity: 80%;
+    }
+  }
+}
+
+.search-label {
+  font-size: 1.3rem;
+  font-family: 'Raleway', sans-serif;
+  color: $middle-blue;
+}
+
+.search-button {
+  background-color: $green-yellow-crayon;
+  box-shadow: 6px 6px 0px 4px $space-cadet,
+  inset 1px 1px 0px 3px $pacific-blue;
+  color: $pacific-blue;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-family: 'Indie Flower', cursive;
+  
+  &:hover {
+    opacity: 80%;
+  }
+}
+
