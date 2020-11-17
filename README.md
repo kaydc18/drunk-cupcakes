@@ -1,26 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<h1>Drunk Cupcakes</h1>
+Drunk Cupcakes is a fun little tool that will convert your favorite cocktail into a cupcake recipe. I came up with the idea after my cohort kept requesting my drunk cupcake formula. Now I am sharing a version of that with everyone!
 
-Things you may want to cover:
+A user can use a search form that either queries from the database or pulls a query from The Cocktail Database api. Once they select a drink, it will take them to a the recipe of that beverage. If a user is signed in or creates an account they will be able to save that recipe to a user profile.
 
-* Ruby version
+[See Drunk Cupcakes online](https://drunkcupcakes.herokuapp.com)
 
-* System dependencies
+<h2>Future Improvements</h2>
+* Adding the ability for a user to give a review on a cupcake recipe
+* Creating a way for a user to submit their own cupcake creations, or create a copy to update from the database.
 
-* Configuration
+<h2>Developer</h2>
+Kaylyn DiCiaccio
 
-* Database creation
+<h3>Created Using</h3>
+* Ruby - 2.6.5
+* Rails - 5.2.3
+* PostgreSQL - 13
 
-* Database initialization
+<h3>Set Up</h3>
 
-* How to run the test suite
+* Clone Repo
+```
+git clone
+```
+* Install Dependencies
+```
+yarn install
+```
+```
+bundle install
+```
+* Create and seed database
+```
+bundle exec rake db: migrate
+```
+```
+bundle exec rake db: seed
+```
+* Run test suite
+```
+bundle exec rspec
+```
+* Start Rails server and webpack
+```
+bundle exec rails s
+```
+```
+yarn run start
+```
+You can view locally here: <http://localhost:3000>
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
 
-[![Codeship Status for kaydc18/drunk-cupcakes](https://app.codeship.com/projects/8ff21815-d233-475c-bb3c-b993fb09c548/status?branch=master)](https://app.codeship.com/projects/416577)
+
+[![Codeship Status for kaydc18/drunk-cupcakes](https://app.codeship.com/projects/8ff21815-d233-475c-bb3c-b993fb09c548/status?branch=main)](https://app.codeship.com/projects/416577)
