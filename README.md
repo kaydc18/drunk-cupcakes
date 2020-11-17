@@ -5,7 +5,7 @@
 * Drunk Cupcakes is a fun little tool that will convert your favorite cocktail into a cupcake recipe. I came up with the idea after my cohort kept requesting my drunk cupcake formula. Now I am sharing a version of that with everyone!
 
 
-* A user can use a search form that either queries from the database or pulls a query from The Cocktail Database api. Once they select a drink, it will take them to a the recipe of that beverage. If a user is signed in or creates an account they will be able to save that recipe to a user profile.
+* A user can use a search form that either queries from the database, or runs a query from The Cocktail Database api. Once they select a drink, it will take them to a the recipe of that beverage. If a user is signed in or creates an account they will be able to save that recipe to a user profile.
 
 [See Drunk Cupcakes online](https://drunkcupcakes.herokuapp.com)
 
