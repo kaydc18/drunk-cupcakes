@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_11_16_040758) do
     t.integer "rating", null: false
     t.text "thoughts"
     t.text "suggested_edits"
+    t.text "username", null: false
+    t.text "recipe_name", null: false
     t.bigint "recipe_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
