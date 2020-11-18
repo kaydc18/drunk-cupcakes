@@ -140,8 +140,8 @@ const RecipeShow = props => {
     rating={review.rating} 
     thoughts={review.thoughts} 
     edits={review.suggested_edits} 
-    user={review.user_id}
-    recipe={review.recipe_id}
+    user={review.username}
+    recipe={review.recipe_name}
     />
     )
   })
