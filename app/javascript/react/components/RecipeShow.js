@@ -114,6 +114,7 @@ const RecipeShow = props => {
     saveInfo = <HandlingInfoTile info={errorList.info} user={errorList.user} />
   }
 
+  
   useEffect(() => {
     fetch(`/api/v1/recipes/${id}/reviews`)
     .then(response => {
