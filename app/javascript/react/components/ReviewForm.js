@@ -66,7 +66,6 @@ const ReviewForm = (props) => {
          </div>
          </div>
        </form>
-    
      </div>
 
  
