@@ -20,8 +20,7 @@ const ReviewForm = (props) => {
     })
   }
 
-  const onSubmitHandler = event => {
-    event.preventDefault()
+  const onSubmitHandler = () => {
     props.handleReview(newReview)
   }
 

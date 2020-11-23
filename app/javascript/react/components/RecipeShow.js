@@ -5,6 +5,7 @@ import RecipeBatterTile from './RecipeBatterTile'
 import HandlingInfoTile from './HandlingInfoTile'
 import ReviewForm from './ReviewForm'
 import ReviewTile from './ReviewTile'
+import { render } from 'enzyme'
 
 const RecipeShow = props => {
   const [newRecipe, setNewRecipe] = useState({})
@@ -105,7 +106,7 @@ const RecipeShow = props => {
         }
 
       })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
 
@@ -133,7 +134,7 @@ const RecipeShow = props => {
   .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  const reviewArray = allReviewData.map((review) => {
+  let reviewArray = allReviewData.map((review) => {
     
     return(
     <ReviewTile 
@@ -146,6 +147,25 @@ const RecipeShow = props => {
     />
     )
   })
+
+  if (setAllReviewData) {
+    reviewArray = allReviewData.map((review) => {
+    
+      return(
+      <ReviewTile 
+      key={review.id} 
+      rating={review.rating} 
+      thoughts={review.thoughts} 
+      edits={review.suggested_edits} 
+      user={review.username}
+      recipe={review.recipe_name}
+      />
+      )
+    })
+  }
+
+
+
  
 return (
   <div className="grid-container">
