@@ -7,10 +7,12 @@ Rails.application.routes.draw do
       resources :recipes, only: [:index]
       resources :recipes, only: [:show] do
         resources :recipe_books, only: [:create]
+        resources :reviews, only: [:index, :create]
       end
       
       resources :users, only: [:show] do
         resources :recipe_books, only: [:index]
+        resources :reviews, only: [:index, :destroy]
       end
       
       resources :recipe_books, only: [:show]

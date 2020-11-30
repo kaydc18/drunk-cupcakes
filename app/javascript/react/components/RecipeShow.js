@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react'
 import RecipeFrostingTile from './RecipeFrostingTile'
 import RecipeBatterTile from './RecipeBatterTile'
 import HandlingInfoTile from './HandlingInfoTile'
+import ReviewForm from './ReviewForm'
+import ReviewTile from './ReviewTile'
+import { render } from 'enzyme'
 
 const RecipeShow = props => {
- 
   const [newRecipe, setNewRecipe] = useState({})
   const [recipeSave, setRecipeSave] = useState({})
+  const [getReviewData, setReviewData] = useState([]);
   const [errorList, setErrorList] = useState({})
+  const [allReviewData, setAllReviewData] = useState([]);
 
   const id = props.match.params.id
 
@@ -55,7 +59,7 @@ const RecipeShow = props => {
           return response
         } else {
           if (response.status === 401) {
-            setErrorList({info: "you need to be logged in to save recipes"})
+            setErrorList({info: "you need to be logged in to submit a review"})
           }
           const errorMessage = `${response.status} (${response.statusText})`;
           const error = new Error(errorMessage);
@@ -75,10 +79,93 @@ const RecipeShow = props => {
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
+  const handleReview = (formPayload) => {
+    const body = JSON.stringify(formPayload)
+    fetch(`/api/v1/recipes/${id}/reviews`, {
+      method: 'POST',
+      body: body,
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw (error);
+        }
+      })
+      .then(response => response.json())
+      .then(responseBody => {
+        if (responseBody.info) {
+          setErrorList(responseBody.error)
+        } else {
+          setReviewData(responseBody.review);
+          setErrorList(responseBody.info)
+        }
+
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+
   let saveInfo
   if (errorList) {
     saveInfo = <HandlingInfoTile info={errorList.info} user={errorList.user} />
   }
+
+  
+  useEffect(() => {
+    fetch(`/api/v1/recipes/${id}/reviews`)
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        const errorMessage = `${response.status} (${response.statusText})`;
+        const error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(responseBody => {
+      setAllReviewData(responseBody);  
+    })
+  .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }, [])
+
+  let reviewArray = allReviewData.map((review) => {
+    
+    return(
+    <ReviewTile 
+    key={review.id} 
+    rating={review.rating} 
+    thoughts={review.thoughts} 
+    edits={review.suggested_edits} 
+    user={review.username}
+    recipe={review.recipe_name}
+    />
+    )
+  })
+
+  if (setAllReviewData) {
+    reviewArray = allReviewData.map((review) => {
+    
+      return(
+      <ReviewTile 
+      key={review.id} 
+      rating={review.rating} 
+      thoughts={review.thoughts} 
+      edits={review.suggested_edits} 
+      user={review.username}
+      recipe={review.recipe_name}
+      />
+      )
+    })
+  }
+
+
+
  
 return (
   <div className="grid-container">
@@ -97,9 +184,15 @@ return (
           <div className="cell medium-6 large-6">
             <div className="fun-button" onClick={handleSave}>Save Recipe</div>
            </div>
-        </div>
-        <div className="grid-x align-center align-middle grid-margin-x grid-margin-y grid-padding-x grid-padding-y"> 
-          {saveInfo}
+           <div className="cell large-12"> 
+            {saveInfo}
+          </div>
+          <div className="cell large-12">
+            <ReviewForm handleReview={handleReview} />
+           </div>
+           <div className="cell large-12">
+            {reviewArray}
+           </div>
         </div>
       </div>
     </div>

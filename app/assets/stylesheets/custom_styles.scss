@@ -31,6 +31,7 @@ body {
   border-radius: 10px;
   border: 1px solid $space-cadet;
   padding: 2rem;
+  margin: 1rem 0;
 
   ul {
     .drinks {
@@ -52,11 +53,7 @@ body {
   }
 
 }
-  .search-label {
-    font-size: 1.3rem;
-    font-family: 'Raleway', sans-serif;
-    color: $middle-blue;
-  }
+
 
   .flash {
     font-size: 2rem;
@@ -85,23 +82,5 @@ body {
       &:hover {
         opacity: 75%;
       }
-    }
-  }
-
-  .search-button {
-    background-color: $green-yellow-crayon;
-    box-shadow: 6px 6px 0px 4px $space-cadet,
-    inset 1px 1px 0px 3px $pacific-blue;
-    color: $pacific-blue;
-    padding: 1rem;
-    margin: 1rem 0;
-    border: none;
-    border-radius: 7px;
-    text-align: center;
-    font-size: 1.3rem;
-    font-family: 'Indie Flower', cursive;
-    
-    &:hover {
-      opacity: 80%;
     }
   }

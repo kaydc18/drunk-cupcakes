@@ -7,4 +7,5 @@ class Recipe < ApplicationRecord
   has_many :ingredients, through: :measurements
   has_many :recipe_books
   has_many :users, through: :recipe_books
+  has_many :reviews
 end
